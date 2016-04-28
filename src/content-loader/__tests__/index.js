@@ -1,6 +1,7 @@
 import test from "ava"
 import webpack from "webpack"
 import { sync as rimraf } from "rimraf"
+import phenomicLoader from ".."
 
 test.cb("phenomic/lib/content-loader", (t) => {
   const outputPath = __dirname + "/output/"
@@ -19,7 +20,7 @@ test.cb("phenomic/lib/content-loader", (t) => {
         loaders: [
           {
             test: /\.md$/,
-            loader: __dirname + "/../index.js",
+            loader: phenomicLoader(),
             exclude: /node_modules/,
           },
         ],

@@ -2,7 +2,7 @@ import path from "path"
 
 import webpack from "webpack"
 import ExtractTextPlugin from "extract-text-webpack-plugin"
-
+import PhenomicLoader from "phenomic/lib/content-loader"
 import pkg from "./package.json"
 
 // note that this webpack file is exporting a "makeConfig" function
@@ -19,25 +19,7 @@ export const makeConfig = (config = {}) => {
       loaders: [
         { // phenomic requirement
           test: /\.md$/,
-          loader: "phenomic/lib/content-loader",
-          query: {
-            context: path.join(__dirname, config.source),
-            // renderer: (text) => html
-            feedsOptions: {
-              title: pkg.name,
-              site_url: pkg.homepage,
-            },
-            feeds: {
-              "feed.xml": {
-                collectionOptions: {
-                  filter: { layout: "Post" },
-                  sort: "date",
-                  reverse: true,
-                  limit: 20,
-                },
-              },
-            },
-          },
+          loader: PhenomicLoader(),
         },
         {
           test: /\.json$/,
@@ -89,6 +71,27 @@ export const makeConfig = (config = {}) => {
           loader: "raw-loader",
         },
       ],
+    },
+
+    phenomic: {
+      loader: {
+        context: path.join(__dirname, config.source),
+        // renderer: (text) => html
+        feedsOptions: {
+          title: pkg.name,
+          site_url: pkg.homepage,
+        },
+        feeds: {
+          "feed.xml": {
+            collectionOptions: {
+              filter: { layout: "Post" },
+              sort: "date",
+              reverse: true,
+              limit: 20,
+            },
+          },
+        },
+      },
     },
 
     postcss: () => [
