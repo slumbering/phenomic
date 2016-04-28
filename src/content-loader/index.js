@@ -6,5 +6,3 @@ export default function() {
 
   return `${ collectionLoader }!${ contentLoader }`
 }
-
-export descriptionPlugin from "../plugins/description.js"
