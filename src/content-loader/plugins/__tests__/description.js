@@ -21,7 +21,7 @@ test("should not touch other properties in mdObject", (t) => {
     bar: undefined,
   }
 
-  t.deepEqual(description(mdObject), expectedObject)
+  t.deepEqual(description()(mdObject), expectedObject)
 })
 
 test("should generate description with default option", (t) => {
@@ -32,7 +32,7 @@ test("should generate description with default option", (t) => {
 
   const expectedResult = "Lorem ipsum Dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad…"
 
-  t.is(description(mdObject).head.description, expectedResult)
+  t.is(description()(mdObject).head.description, expectedResult)
 })
 
 test("should allow setting description in frontmatter", (t) => {
@@ -43,7 +43,7 @@ test("should allow setting description in frontmatter", (t) => {
     rawBody: "",
   }
 
-  t.is(description(mdObject).head.description, mdObject.head.description)
+  t.is(description()(mdObject).head.description, mdObject.head.description)
 })
 
 test("should allow to override pruneLength and pruneString", (t) => {
@@ -58,7 +58,7 @@ test("should allow to override pruneLength and pruneString", (t) => {
   }
 
   const expectedResult = "Lorem ipsum Dolor sit amet, consectetur[...]"
-  t.is(description(mdObject, opts).head.description, expectedResult)
+  t.is(description(opts)(mdObject).head.description, expectedResult)
 })
 
 test("should use default pruneLength if pruneLength < 10", (t) => {
@@ -80,7 +80,7 @@ test("should use default pruneLength if pruneLength < 10", (t) => {
 
   const expectedResult = "Lorem ipsum Dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad[...]"
 
-  t.is(description(mdObject, opts).head.description, expectedResult)
+  t.is(description(opts)(mdObject).head.description, expectedResult)
   t.true(called)
 
   console.warn = originalConsole

@@ -2,7 +2,7 @@ import path from "path"
 
 import webpack from "webpack"
 import ExtractTextPlugin from "extract-text-webpack-plugin"
-import PhenomicLoader from "phenomic/lib/content-loader"
+import PhenomicLoader, { descriptionPlugin } from "phenomic/lib/content-loader"
 import pkg from "./package.json"
 
 // note that this webpack file is exporting a "makeConfig" function
@@ -77,6 +77,9 @@ export const makeConfig = (config = {}) => {
       loader: {
         context: path.join(__dirname, config.source),
         // renderer: (text) => html
+        plugins: [
+          descriptionPlugin(),
+        ],
         feedsOptions: {
           title: pkg.name,
           site_url: pkg.homepage,

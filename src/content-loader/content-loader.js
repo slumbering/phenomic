@@ -4,7 +4,6 @@ import frontMatterParser from "gray-matter"
 
 import joinUri from "../_utils/join-uri"
 import urlify from "../_utils/urlify"
-import description from "./description"
 import validator from "./validator"
 
 module.exports = function(input) {
@@ -57,7 +56,8 @@ module.exports = function(input) {
     ...metadata,
   }
 
-  textData = description(textData, query.description)
+  const plugins = query.plugins || []
+  plugins.forEach((plugin) => textData = plugin(textData))
 
   return textData
 }
