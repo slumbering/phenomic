@@ -10,6 +10,8 @@ import PageLoading from "../layouts/PageLoading"
 import Homepage from "../layouts/Homepage"
 import Showcase from "../layouts/Showcase"
 
+import Search from "../layouts/Search"
+
 class PageContainer extends Component {
   render() {
     const { props } = this
@@ -30,6 +32,7 @@ class PageContainer extends Component {
 
 export default (
   <Route component={ LayoutContainer }>
+    <Route path="/search" component={ Search } />
     <Route path="*" component={ PageContainer } />
   </Route>
 )
