@@ -68,7 +68,8 @@ Available values for `offline`:
   - `serviceWorker: boolean = true`: Enable/Disable Service Worker seperately
   - `pattern: Array = [ "**", "!**/*.html", "index.html" ]`: Define your own globby pattern. A useful case for this option is when you need to remove images from caching list if your website is quite big. But be careful, double check everything before you apply the change.
 
-Now rebuild your website and you may notice some new files in ``dist`` folder such as  ``manifest.appcache``, ``sw.js``, ``sw-register.js`` depending on the options you provided.
+Now rebuild your website and you may notice some new files in ``dist`` folder
+such as ``manifest.appcache``, ``sw.js`` depending on the options you provided.
 
 > **NOTE**: Offline support will **not be enabled** in development mode
 

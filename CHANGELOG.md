@@ -1,3 +1,21 @@
+# HEAD
+
+- Changed: Service Worker now use network first approach.
+  This is to prevent having an outdated collection that will lead to request
+  outdated entries urls that might not exist anymore (and that have not been
+  cached yet, see [#451](https://github.com/MoOx/phenomic/issues/451)).
+  This is for the better.
+  By the way, we now rely on
+  [offline-plugin](https://github.com/NekR/offline-plugin)
+  to generate Service Worker and Appcache files.
+  The part that register the Service Worker is now included in the client
+  bundle.
+  **Note that for a better caching, the default boilerplate now use ``[hash]``
+  in the filenames loaded via ``file-loader``.**
+  We encourage you to do the same by using a parameter like
+  ``loader: "file-loader?name=[path][name].[hash].[ext] // ...``.
+  ([#485](https://github.com/MoOx/phenomic/issues/485) - @MoOx)
+
 # 0.14.2 - 2016-06-12
 
 - Fixed: Security exception when accessing "/" via a
